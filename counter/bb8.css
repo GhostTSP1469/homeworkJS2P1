@@ -1,0 +1,8 @@
+.pad{
+text-align: center;
+}
+.back{
+    display: inline-flex;
+    padding: 10px 20px;
+    padding-left: 90px;
+}
