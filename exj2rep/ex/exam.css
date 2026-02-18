@@ -1,0 +1,87 @@
+.submit{
+    background: transparent;
+    background-color: rgb(80, 80, 246);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-weight: bold;
+    border-radius: 30px;
+    transition-duration: 150ms;
+}
+.submit:hover{
+    background-color: rgb(80, 80, 246, 0.8);
+    cursor: pointer;
+    transition-duration: 150ms;
+    transform: scale(1.1);
+}
+input{
+    border-radius: 30px;
+    padding: 10px 15px;
+     border: 1px solid darkslategrey;
+}
+.active{
+    color: green;
+}
+.inactive{
+    color: red;
+}
+.deleteBTN,.editBTN,.infoBTN{
+    background: transparent;
+    background-color: lightgray;
+    border: none;
+   border: 1px solid darkslategrey;
+   border-radius: 15px;
+   margin-right: 5px;
+   padding: 10px 20px;
+}
+.infoBTN:hover{
+    background-color: gray;
+    cursor: pointer;
+    transition-duration: 150ms;
+    transform: scale(1.1);
+}
+.editBTN:hover{
+    background-color: gray;
+    cursor: pointer;
+    transition-duration: 150ms;
+    transform: scale(1.1);
+}
+.deleteBTN:hover{
+    background-color: gray;
+    cursor: pointer;
+    transition-duration: 150ms;
+    transform: scale(1.1);
+}
+.tableRow:hover{
+    background-color: rgb(220, 220, 220);
+    transition-duration: 150ms;
+}
+table{
+    border-collapse: collapse;
+    
+    
+}
+table, th, td{
+    border: 1px solid black;
+    padding: 10px 20px;
+
+}
+.cell{
+    padding: 5px 15px;
+    border-radius: 10px;
+    border: 1px solid darkslategrey;
+}
+.cell:hover{
+    background-color: lightgray;
+}
+options{
+    padding: 5px 15px;
+    border-radius: 10px;
+    border: 1px solid darkslategrey;
+}
+input:hover{
+    background-color: lightgray;
+}
+th{
+    background-color: rgb(142, 255, 142);
+}
