@@ -5,31 +5,38 @@ let add = document.querySelector(".addBtn");
 let addModal = document.querySelector(".addModal");
 let closeBtn = document.querySelector(".closeB");
 let addBtn = document.querySelector(".addB");
+let infoModal = document.querySelector(".infoModal");
 
-let currentId = null; 
+let currentId = null;
+
 
 
 async function getData() {
-    try {
-        let res = await fetch(url);
-        let data = await res.json();
-        showData(data);
-    } catch (error) {
-        console.log(error);
-    }
+    let res = await fetch(url);
+    let data = await res.json();
+    showData(data);
 }
+
+
+
+function infoUser(user) {
+    document.querySelector(".infoName").innerText = `Name: ${user.name}`;
+    document.querySelector(".infoEmail").innerText = `Email: ${user.gmail}`;
+    
+    let statusEl = document.querySelector(".infoStatus");
+    statusEl.innerText = `Status: ${user.status ? "Active" : "Inactive"}`;
+    statusEl.style.color = user.status ? "green" : "red";
+
+    infoModal.showModal();
+}
+
 
 
 async function deleteUser(id) {
-    try {
-        await fetch(`${url}/${id}`, {
-            method: "DELETE",
-        });
-        getData();
-    } catch (error) {
-        console.log(error);
-    }
+    await fetch(`${url}/${id}`, { method: "DELETE" });
+    getData();
 }
+
 
 
 async function saveUser() {
@@ -37,51 +44,33 @@ async function saveUser() {
     let gmail = document.querySelector(".email").value;
     let avatar = document.querySelector(".avatar").value;
 
-    let userObj = {
-        name,
-        gmail,
-        avatar
-    };
+    let userObj = { name, gmail, avatar };
 
-    try {
-
-        if (currentId) {
-            
-            await fetch(`${url}/${currentId}`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(userObj)
-            });
-        } else {
-            
-            await fetch(url, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(userObj)
-            });
-        }
-
-        addModal.close();
-        document.querySelector(".name").value = "";
-        document.querySelector(".email").value = "";
-        document.querySelector(".avatar").value = "";
-        currentId = null;
-
-        getData();
-
-    } catch (error) {
-        console.log(error);
+    if (currentId) {
+        await fetch(`${url}/${currentId}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(userObj)
+        });
+    } else {
+        await fetch(url, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(userObj)
+        });
     }
+
+    addModal.close();
+    currentId = null;
+    getData();
 }
+
+
 
 function showData(data) {
     box.innerHTML = "";
 
-    data.forEach((el) => {
+    data.forEach(el => {
 
         let tr = document.createElement("tr");
 
@@ -94,33 +83,33 @@ function showData(data) {
         let td2 = document.createElement("td");
         td2.innerText = el.gmail;
 
-        let tdActions = document.createElement("td");
-let tdStatus = document.createElement("td");
+        let tdStatus = document.createElement("td");
         tdStatus.innerText = el.status ? "Active" : "Inactive";
-        let deleteBtn = document.createElement("button");
-        deleteBtn.innerText = "Delete";
-if (el.status) {
-            tdStatus.style.color = "green";
-        } else {
-            tdStatus.style.color = "red";
-        }
-        let editBtn = document.createElement("button");
+        tdStatus.style.color = el.status ? "green" : "red";
+
         let checkBox = document.createElement("input");
         checkBox.type = "checkbox";
         checkBox.checked = el.status;
-         
-        editBtn.innerText = "Edit";
 
-        deleteBtn.onclick = () => deleteUser(el.id);
-checkBox.onchange=()=>{
-            fetch(`${url}/${el.id}`, {
+        checkBox.onchange = async () => {
+            await fetch(`${url}/${el.id}`, {
                 method: "PUT",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ ...el, status: checkBox.checked })
-            }).then(() => getData());
-        }
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ status: checkBox.checked })
+            });
+            getData();
+        };
+
+        tdStatus.appendChild(checkBox);
+
+        let tdActions = document.createElement("td");
+
+        let deleteBtn = document.createElement("button");
+        deleteBtn.innerText = "Delete";
+        deleteBtn.onclick = () => deleteUser(el.id);
+
+        let editBtn = document.createElement("button");
+        editBtn.innerText = "Edit";
         editBtn.onclick = () => {
             currentId = el.id;
             document.querySelector(".name").value = el.name;
@@ -128,13 +117,18 @@ checkBox.onchange=()=>{
             document.querySelector(".avatar").value = el.avatar;
             addModal.showModal();
         };
-        
-tdStatus.appendChild(checkBox);
-        tdActions.append(editBtn, deleteBtn);
+
+        let infoBtn = document.createElement("button");
+        infoBtn.innerText = "Info";
+        infoBtn.onclick = () => infoUser(el);
+
+        tdActions.append(editBtn, deleteBtn, infoBtn);
+
         tr.append(tdavatar, td1, td2, tdStatus, tdActions);
         box.append(tr);
     });
 }
+
 
 
 add.onclick = () => {
@@ -142,10 +136,8 @@ add.onclick = () => {
     addModal.showModal();
 };
 
-closeBtn.onclick = () => {
-    addModal.close();
-};
-
+closeBtn.onclick = () => addModal.close();
 addBtn.onclick = saveUser;
+document.querySelector("#back").onclick = () => infoModal.close();
 
 getData();
