@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+  <dialog class="addModal">
+  <form class="addForm">
+    <input type="text" name="name" placeholder="Name" required>
+    <input type="text" name="avatar" placeholder="Avatar URL" required>
+    <input type="number" name="salary" placeholder="Salary" required>
+    <input type="date" name="age" required>
+
+    <select name="status">
+      <option value="true">In Stock</option>
+      <option value="false">Out of Stock</option>
+    </select>
+
+    <button type="submit">Save</button>
+    <button type="button" class="closeAdd">Cancel</button>
+  </form>
+</dialog>
+
+    <input type="text" class="searchInp" placeholder="Search by name...">
+
+<select class="sortSelect">
+  <option value="">Sort By</option>
+  <option value="salaryAsc">Salary ↑</option>
+  <option value="salaryDesc">Salary ↓</option>
+  <option value="ageAsc">Age ↑</option>
+  <option value="ageDesc">Age ↓</option>
+</select>
+
+<button class="deleteSelected">Delete Selected</button>
+<button class="addBtn" >+ New</button>
+<table>
+    <thead>
+        <tr>
+        <th>avatar</th>
+        <th>name</th>
+        <th>salary</th>
+        <th>age</th>
+        <th>status</th>
+        <th>actions</th>
+    </tr>
+</thead>
+<tbody class="box">
+    
+</tbody>
+    
+</table>
+<dialog class="infoModal">
+   <h1>INFORMATION</h1> 
+<img src="" alt="" style="width: 80px;" class="infoAvatar">
+<h2 class="infoName"></h2>
+<h3 class="infoAge"></h3>
+<h4 class="infoSalary"></h4>
+<button class="cancel">cancel</button>
+</dialog>
+<script type="module" src="viv.js"></script>
+</body>
+</html>

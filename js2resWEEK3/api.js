@@ -15,6 +15,7 @@ async function PostUser(user) {
   try {
     await axios.post(API, user);
   } catch (error) {
+    
     console.log(error);
   }
 }

@@ -1,0 +1,31 @@
+{
+  "users": [
+    {
+      "id": "2",
+      "name": "Maria Lopez",
+      "avatar": "https://i.pravatar.cc/150?img=5",
+      "salary": 1200,
+      "age": "1992-09-23T00:00:00.000Z",
+      "createdAt": "2026-02-03T14:30:00.000Z",
+      "status": true
+    },
+    {
+      "id": "3",
+      "name": "Emma Johnson",
+      "avatar": "https://i.pravatar.cc/150?img=20",
+      "salary": 780,
+      "age": "2000-03-14T00:00:00.000Z",
+      "createdAt": "2026-02-12T08:10:00.000Z",
+      "status": false
+    },
+    {
+      "id": "4",
+      "name": "John Pork",
+      "avatar": "https://i.pravatar.cc/150?img=11",
+      "salary": 780,
+      "age": "2000-03-14T00:00:00.000Z",
+      "createdAt": "2026-02-12T08:10:00.000Z",
+      "status": false
+    }
+  ]
+}
