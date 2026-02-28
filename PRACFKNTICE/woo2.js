@@ -1,56 +1,13 @@
-let url = "http://localhost:3001/users";
+export let url = "http://localhost:3001/users";
 
 let addBtn = document.querySelector(".addBtn");
-let addModal = document.querySelector(".addModal");
+export let addModal = document.querySelector(".addModal");
 let addForm = document.querySelector(".addForm");
 let closeAdd = document.querySelector(".closeAdd");
 
 
 
-addBtn.onclick = () => {
-  addForm.reset();
-  addModal.showModal();
-};
 
-
-
-closeAdd.onclick = () => {
-  addModal.close();
-};
-
-
-
-async function addUser(user) {
-  await fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(user)
-  });
-}
-
-
-
-addForm.onsubmit = async (e) => {
-  e.preventDefault();
-
-  let newUser = {
-    name: addForm["name"].value,
-    avatar: addForm["avatar"].value,
-    salary: Number(addForm["salary"].value),
-    age: new Date(addForm["age"].value).toISOString(),
-    status: addForm["status"].value === "true",
-    createdAt: new Date().toISOString()
-  };
-
-  await addUser(newUser);
-
-  addModal.close();
-  addForm.reset();
-
-  getUsers(); 
-};
 
 let box = document.querySelector(".box");
 let infoModal = document.querySelector(".infoModal");
@@ -81,7 +38,7 @@ async function getUsers() {
 
 
 
-function calculateAge(dateString) {
+export function calculateAge(dateString) {
   return new Date().getFullYear() - new Date(dateString).getFullYear();
 }
 
@@ -198,39 +155,7 @@ cancel.onclick = () => infoModal.close();
 
 
 
-addForm.onsubmit = async (e) => {
-  e.preventDefault();
 
-  let userData = {
-    name: addForm["name"].value,
-    avatar: addForm["avatar"].value,
-    salary: Number(addForm["salary"].value),
-    age: new Date(addForm["age"].value).toISOString(),
-    status: addForm["status"].value === "true",
-    createdAt: new Date().toISOString()
-  };
-
-  if (currentId) {
-    await fetch(`${url}/${currentId}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(userData)
-    });
-    currentId = null;
-  } else {
-    await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(userData)
-    });
-  }
-
-  addModal.close();
-  addForm.reset();
-  getUsers();
-};
-
-closeAdd.onclick = () => addModal.close();
 
 
 
@@ -279,15 +204,8 @@ sortSelect.onchange = async (e) => {
 
 
 
-deleteSelectedBtn.onclick = async () => {
-  for (let id of selectedIds) {
-    await fetch(`${url}/${id}`, { method: "DELETE" });
-  }
-
-  selectedIds = [];
-  getUsers();
-};
 
 
 
-export { getUsers };
+export{getUsers}
+export { box,infoModal,cancel,addBtn,closeAdd,deleteSelectedBtn,selectedIds,currentId,addForm };
